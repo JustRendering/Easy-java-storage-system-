@@ -9,7 +9,7 @@ This is a easy to use java storage system that uses .txt files to work. It will 
 #### Information for people who want to know more (How it works)
 Data saves like: *ID\~Call:Data;ID2\~Call:Data2;ID3~Call:Data3;* The ';' seperate different data strings and the ':' seperate the two parts, call and data.
 
-#### Very detailed setup explanation
+#### More detailed setup explanation
 Once you download the scripts, put them into a package of your choosing. - the test.java is a simple menu for you to use and test the system out, but is also a simple editor. I recomend you keep it and use it if you dont know how to build your own data editor. Now everything is where you want, time to use it in a script. I have made here a simple class with the implementation done. Obviosly you will have to edit it but take a look. 
 ###### Use class
 package (package);<br />
