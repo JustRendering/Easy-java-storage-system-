@@ -12,14 +12,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class EasyStorage {
 
-	
-	String filepath = "none.txt";
+	String filepath = null;
+
 	public EasyStorage(String filepath) {
 		this.filepath = filepath;
 	}
@@ -30,6 +34,7 @@ public class EasyStorage {
 				FileWriter fw = new FileWriter(filepath, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(id + "~call" + ":" + message + ";");
+				bw.newLine();
 				bw.close();
 			} catch (Exception e) {
 				System.out.println("Error: " + "Failed to write data '" + id + ":" + message + ";" + "' :: ErrorCode: "
@@ -41,6 +46,7 @@ public class EasyStorage {
 				FileWriter fw = new FileWriter(filepath, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(id + "~call" + ":" + message + ";");
+				bw.newLine();
 				bw.close();
 			} catch (Exception e) {
 				System.out.println("Error: " + "Failed to write data '" + id + ":" + message + ";" + "' :: ErrorCode: "
@@ -78,16 +84,19 @@ public class EasyStorage {
 		try {
 			FileReader fr = new FileReader(filepath);
 			BufferedReader br = new BufferedReader(fr);
-			String alldata = br.readLine();
+			List<String> lines = Files.readAllLines(Paths.get(filepath), Charset.forName("UTF-8"));
+
 			br.close();
-			List<String> datasets = new ArrayList<String>(Arrays.asList(alldata.split(";")));
-			for (String data : datasets) {
-				List<String> parts = new ArrayList<String>(Arrays.asList(data.split(":")));
-				if (parts.contains(id + "~call")) {
-					parts.remove(id + "~call");
-					if (parts.size() == 1) {
-						for (String returndat : parts) {
-							return returndat;
+			for (String alldata : lines) {
+				List<String> datasets = new ArrayList<String>(Arrays.asList(alldata.split(";")));
+				for (String data : datasets) {
+					List<String> parts = new ArrayList<String>(Arrays.asList(data.split(":")));
+					if (parts.contains(id + "~call")) {
+						parts.remove(id + "~call");
+						if (parts.size() == 1) {
+							for (String returndat : parts) {
+								return returndat;
+							}
 						}
 					}
 				}
@@ -104,4 +113,3 @@ public class EasyStorage {
 		return null;
 	}
 }
-
