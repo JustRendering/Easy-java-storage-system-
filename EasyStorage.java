@@ -30,7 +30,6 @@ public class EasyStorage {
 				FileWriter fw = new FileWriter(filepath, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(id + "~call" + ":" + message + ";");
-				bw.newLine();
 				bw.close();
 			} catch (Exception e) {
 				System.out.println("Error: " + "Failed to write data '" + id + ":" + message + ";" + "' :: ErrorCode: "
@@ -42,7 +41,6 @@ public class EasyStorage {
 				FileWriter fw = new FileWriter(filepath, true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write(id + "~call" + ":" + message + ";");
-				bw.newLine();
 				bw.close();
 			} catch (Exception e) {
 				System.out.println("Error: " + "Failed to write data '" + id + ":" + message + ";" + "' :: ErrorCode: "
